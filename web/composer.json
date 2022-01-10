@@ -1,0 +1,16 @@
+{
+    "require": {
+        "slim/slim": "^4.9",
+        "slim/psr7": "^1.5",
+        "vlucas/phpdotenv": "^5.4",
+        "slim/twig-view": "^3.3",
+        "php-di/php-di": "^5",
+        "ext-pdo": "*",
+        "awurth/slim-validation": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

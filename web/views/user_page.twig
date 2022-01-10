@@ -1,0 +1,40 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <div class="user-page">
+        <div>
+            <p>Имя: {{ user.first_name }}</p>
+        </div>
+        <div>
+            <p>Фамилия: {{ user.last_name }}</p>
+        </div>
+        <div>
+            <p>Возраст: {{ user.age }}</p>
+        </div>
+        <div>
+            <p>Пол: {{ sex }}</p>
+        </div>
+        <div>
+            <p>Интересы: {{ user.interests }}</p>
+        </div>
+        <div>
+            <p>Город: {{ city.name }}</p>
+        </div>
+        {% if canAddFriend %}
+            <form action="/user/add-friend/{{ user.id }}" method="post">
+                <button type="submit">Добавить в друзья</button>
+            </form>
+        {% endif %}
+        {% if canRemoveFriend %}
+            <form action="/user/remove-friend/{{ user.id }}" method="post">
+                <button type="submit">Убрать из друзей</button>
+            </form>
+        {% endif %}
+    </div>
+    <style>
+        div.user-page {
+            text-align: center;
+            font-size: x-large;
+        }
+    </style>
+{% endblock %}

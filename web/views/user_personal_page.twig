@@ -1,0 +1,42 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <div class="user-page">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <p>Имя: {{ user.first_name }}</p>
+                </div>
+                <div>
+                    <p>Фамилия: {{ user.last_name }}</p>
+                </div>
+                <div>
+                    <p>Возраст: {{ user.age }}</p>
+                </div>
+                <div>
+                    <p>Пол: {{ sex }}</p>
+                </div>
+                <div>
+                    <p>Интересы: {{ user.interests }}</p>
+                </div>
+                <div>
+                    <p>Город: {{ city.name }}</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h1>Список друзей</h1>
+                {% for friend in friends %}
+                    <div>
+                        <a href="/user/page/{{ friend.id }}">{{ friend.first_name }} {{ friend.last_name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <style>
+        div.user-page {
+            text-align: center;
+            font-size: x-large;
+        }
+    </style>
+{% endblock %}

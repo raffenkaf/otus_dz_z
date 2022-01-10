@@ -1,0 +1,89 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <div class="register">
+        <form action="/user/register" method="post">
+            <div>
+                <label for="login">Логин:</label>
+                <input type="text" name="login">
+                {% if has_error('login') %}<p>{{ error('login') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="password">Пароль:</label>
+                <input type="password" name="password">
+                {% if has_error('password') %}<p>{{ error('password') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="confirm_password">Повторить пароль:</label>
+                <input type="password" name="confirm_password">
+                {% if has_error('confirm_password') %}<p>{{ error('confirm_password') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="first_name">Имя:</label>
+                <input type="text" name="first_name">
+                {% if has_error('last_name') %}<p>{{ error('last_name') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="last_name">Фамилия:</label>
+                <input type="text" name="last_name">
+                {% if has_error('last_name') %}<p>{{ error('last_name') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="age">Возраст:</label>
+                <input type="number" max="150" min="5" name="age">
+                {% if has_error('age') %}<p>{{ error('age') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="sex">Пол:</label>
+                <select name="sex">
+                    <option value="1" selected>Мужской</option>
+                    <option value="2">Женский</option>
+                </select>
+                {% if has_error('sex') %}<p>{{ error('sex') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="interests">Интересы:</label>
+                <textarea name="interests"></textarea>
+                {% if has_error('interests') %}<p>{{ error('interests') }}</p>{% endif %}
+            </div>
+            <div>
+                <label for="city">Город:</label>
+                <select name="city">
+                    {% for city in cities %}
+                        <option value="{{ city.id }}">{{ city.name }}</option>
+                    {% endfor %}
+                </select>
+                {% if has_error('city') %}<p>{{ error('city') }}</p>{% endif %}
+            </div>
+            <div>
+                <p><button type="submit">Зарегистрироваться</button></p>
+            </div>
+        </form>
+    </div>
+    <style>
+        div.register {
+            text-align: center;
+        }
+        div.register form div {
+            min-height: 40px;
+            width: 50%;
+            margin: auto;
+        }
+
+        div.register form div label {
+            min-width: 140px;
+        }
+
+        div.register form div input {
+            min-width: 250px;
+        }
+
+        div.register form div select {
+            min-width: 250px;
+        }
+
+        div.register form div textarea {
+            min-width: 250px;
+        }
+    </style>
+{% endblock %}
