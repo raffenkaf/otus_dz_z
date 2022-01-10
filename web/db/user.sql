@@ -1,0 +1,5 @@
+INSERT INTO test.user (id, first_name, last_name, age, sex, interests, city_id, login, password) VALUES (1, 'rafas', 'rafa', 22, 1, '', 1, 'sssssss', '$2y$10$RG4NnPIkt5GsDz21mXINWeclpXL5oWczghf3GT/M80z8DCuF4ayZC');
+INSERT INTO test.user (id, first_name, last_name, age, sex, interests, city_id, login, password) VALUES (2, 'das', 'asdf', 23, 1, '', 2, 'wwwwwww', '$2y$10$RG4NnPIkt5GsDz21mXINWeclpXL5oWczghf3GT/M80z8DCuF4ayZC');
+INSERT INTO test.user (id, first_name, last_name, age, sex, interests, city_id, login, password) VALUES (3, 'daad', 'ada', 24, 2, '', 3, 'bbbbbbb', '$2y$10$RG4NnPIkt5GsDz21mXINWeclpXL5oWczghf3GT/M80z8DCuF4ayZC');
+INSERT INTO test.user (id, first_name, last_name, age, sex, interests, city_id, login, password) VALUES (4, 'adddf', 'afa', 25, 2, '', 4, 'ddddddd', '$2y$10$RG4NnPIkt5GsDz21mXINWeclpXL5oWczghf3GT/M80z8DCuF4ayZC');
+INSERT INTO test.user (id, first_name, last_name, age, sex, interests, city_id, login, password) VALUES (5, 'wert', 'awa', 26, 1, '', 5, 'ccccccc', '$2y$10$RG4NnPIkt5GsDz21mXINWeclpXL5oWczghf3GT/M80z8DCuF4ayZC');
