@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'root' => dirname(__DIR__ . '/../'),
+    'root' => dirname(__DIR__ . '/'),
 
     'app' => [
         'name' => getenv('APP_NAME'),

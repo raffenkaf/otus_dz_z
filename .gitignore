@@ -1,5 +1,4 @@
 .idea
-web/.env
 .env
 /data
-/web/vendor
+/vendor

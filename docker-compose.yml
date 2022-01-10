@@ -4,7 +4,7 @@ services:
     image: nginx:alpine
     volumes:
       - "./deploy/nginx.default.conf:/etc/nginx/conf.d/default.conf"
-      - "./web:/var/www/html"
+      - ".:/var/www/html"
     ports:
       - "80:80"
     environment:
@@ -22,12 +22,12 @@ services:
       - ".env"
     volumes:
       - "./deploy/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - "./web:/var/www/html"
+      - ".:/var/www/html"
   composer:
     image: composer:2.2.3
     volumes:
-      - "./web:/app"
-    command: install
+      - ".:/app"
+    command: composer install
   mysqldb:
     image: mysql:${MYSQL_VERSION}
     container_name: ${MYSQL_HOST}
