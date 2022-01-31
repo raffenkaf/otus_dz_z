@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\City;
 use App\Models\User;
+use App\Models\UserSearchDTO;
 use Respect\Validation\Validator;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
@@ -161,5 +162,28 @@ class UserController extends BaseController
         $authUser->removeFriend($user);
 
         return $response->withStatus(302)->withHeader('Location', '/user/page/' . $user->id);
+    }
+
+    public function search(Request $request, Response $response, array $args): Response
+    {
+        $usersOnPage = 20;
+        $queryParams = $request->getQueryParams();
+
+        $maxId = $queryParams['max_id'] ?? null;
+        $minId = $queryParams['min_id'] ?? null;
+
+        $firstName = $queryParams['first_name'] ?? null;
+        $lastName = $queryParams['last_name'] ?? null;
+
+        $searchDTO = new UserSearchDTO($minId, $maxId, $firstName, $lastName, $usersOnPage);
+
+        $users = (new User($this->container->get('pdo')))->search($searchDTO);
+
+        return $this->view->render($response, 'user_search.twig', [
+            'users' => $users,
+            'last_user_id' => end($users)->id,
+            'first_name' => $firstName,
+            'last_name' => $lastName
+        ]);
     }
 }

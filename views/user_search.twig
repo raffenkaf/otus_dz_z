@@ -1,0 +1,57 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <form method="get" action="/user/search" id="search-form-id">
+        <div class="all-search-page">
+            <div class="search-header">
+                <div>
+                    <label for="first-name-id">
+                        Поиск по имени
+                        <input type="text" value="{{ first_name }}" name="first_name" id="first-name-id">
+                    </label>
+                    <label for="last-name-id">
+                        Поиск по фамилии
+                        <input type="text" value="{{ last_name }}" name="last_name" id="last-name-id">
+                    </label>
+                </div>
+                <div style="margin-top: 10px">
+                    <button type="submit" id="user-clean-search">Искать</button>
+                </div>
+            </div>
+
+            {% for user in users %}
+                <div class="one-user">
+                    <div>
+                        <a href="/user/page/{{ user.id }}">
+                            <p>{{ user.first_name }} {{ user.last_name }}</p>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="search-footer">
+                <a href="/user/search" id="next-link-id">Далее</a>
+            </div>
+        </div>
+
+        <input type="hidden" name="max_id" value="{{ last_user_id }}" id="last-user-id">
+    </form>
+    <style>
+        .all-search-page {
+            text-align: center;
+        }
+
+        .one-user {
+            margin-bottom: 10px;
+        }
+
+        .search-footer {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .search-header {
+            margin-bottom: 30px;
+        }
+    </style>
+{% endblock %}

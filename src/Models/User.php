@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use http\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 use PDO;
 use Respect\Validation\Validator;
 
@@ -18,8 +18,8 @@ class User extends BaseModel
     public ?int $sex;
     public ?string $interests;
     public ?int $city_id;
-    private ?string $login;
-    private ?string $password;
+    public ?string $login;
+    public ?string $password;
 
     public function getValidationRules(): array
     {
@@ -236,6 +236,58 @@ class User extends BaseModel
 
         $statement = $this->pdo->prepare($sql);
         $statement->execute(['id_one' => $this->id, 'id_two' => $this->id]);
+
+        $resultArray = [];
+        while ($row = $statement->fetch(PDO::FETCH_LAZY))
+        {
+            $resultArray[] = $this->createUserByArray($row);
+        }
+
+        return $resultArray;
+    }
+
+    public function search(UserSearchDTO $searchDTO): array
+    {
+        $sql = "
+        SELECT *
+        FROM user
+        ";
+
+        if ($searchDTO->hasAnyValue()) {
+            $sql .= ' WHERE ';
+        }
+
+        $substituteValues = [];
+
+        if (!is_null($searchDTO->getMinId())) {
+            $sql .= ' id > :min_id AND ';
+            $substituteValues[':min_id'] = $searchDTO->getMinId();
+        }
+
+        if (!is_null($searchDTO->getMaxId())) {
+            $sql .= ' id < :max_id AND ';
+            $substituteValues[':max_id'] = $searchDTO->getMaxId();
+        }
+
+        if (!empty($searchDTO->getFirstName())) {
+            $sql .= " first_name LIKE :first_name_prefix AND ";
+            $substituteValues[':first_name_prefix'] = $searchDTO->getFirstName() . '%';
+        }
+
+        if (!empty($searchDTO->getLastName())) {
+            $sql .= " last_name LIKE :last_name_prefix AND ";
+            $substituteValues[':last_name_prefix'] = $searchDTO->getLastName() . '%';
+        }
+
+        if ($searchDTO->hasAnyValue()) {
+            $sql = substr($sql, 0, -4);
+        }
+
+        $sql .= " ORDER BY id DESC LIMIT :user_on_page ";
+        $substituteValues['user_on_page'] = $searchDTO->getUserOnPage();
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute($substituteValues);
 
         $resultArray = [];
         while ($row = $statement->fetch(PDO::FETCH_LAZY))

@@ -6,7 +6,7 @@ services:
       - "./deploy/nginx.default.conf:/etc/nginx/conf.d/default.conf"
       - ".:/var/www/html"
     ports:
-      - "80:80"
+      - ${LOCALHOST_PORT}:80
     environment:
       - NGINX_HOST=${NGINX_HOST}
     restart: always

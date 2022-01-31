@@ -15,4 +15,5 @@ return function (App $app) {
     $app->get('/user/page/{id}', [UserController::class, 'page']);
     $app->post('/user/add-friend/{id}', [UserController::class, 'addFriend']);
     $app->post('/user/remove-friend/{id}', [UserController::class, 'removeFriend']);
+    $app->get('/user/search', [UserController::class, 'search']);
 };

@@ -30,5 +30,9 @@ return [
         'display_error_details' => true,
         'log_errors' => false,
         'log_error_details' => false,
+    ],
+
+    'commands' => [
+        \App\Console\DbFillUsersCommand::class,
     ]
 ];

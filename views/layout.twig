@@ -26,5 +26,15 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    $('#next-link-id').click(function (event) {
+        event.preventDefault();
+        $('#search-form-id').submit();
+    });
+
+    $('#user-clean-search').click(function (event) {
+        $('#last-user-id').remove();
+    });
+</script>
 </body>
 </html>

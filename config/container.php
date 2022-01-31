@@ -5,6 +5,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
 use Slim\Views\Twig;
+use Symfony\Component\Console\Application;
 
 return [
     'settings' => function () {
@@ -32,7 +33,7 @@ return [
         $settings = $container->get('settings')['database'];
 
         $host = $settings['host'];
-        $db   = $settings['database'];
+        $db = $settings['database'];
         $user = $settings['username'];
         $pass = $settings['password'];
         $charset = $settings['charset'];
@@ -47,5 +48,15 @@ return [
         ];
 
         return new PDO($dsn, $user, $pass, $opt);
-    }
+    },
+
+    Application::class => function (ContainerInterface $container) {
+        $application = new Application();
+
+        foreach ($container->get('settings')['commands'] as $class) {
+            $application->add($container->get($class));
+        }
+
+        return $application;
+    },
 ];
